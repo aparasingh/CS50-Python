@@ -1,3 +1,4 @@
+# Dictionary of fruits and their calories
 fruits = {
     "apple": 130,
     "avocado": 50,
@@ -21,5 +22,6 @@ fruits = {
     "watermelon": 80
 }
 item = input("Input: ")
+# Find and print calories of the input provided by user
 if item.lower() in fruits:
     print("Calories: ", fruits[item.lower()])
