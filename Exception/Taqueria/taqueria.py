@@ -1,3 +1,4 @@
+# Set Menu for restaurant
 menu = {
     "Baja Taco": 4.25,
     "Burrito": 7.50,
@@ -12,6 +13,7 @@ menu = {
 
 while True:
     try:
+        # Take Order
         item = input()
         if item in menu.lower():
             print(fruits[item.lower()])
