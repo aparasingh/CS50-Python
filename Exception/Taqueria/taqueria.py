@@ -1,4 +1,3 @@
-# Set Menu for restaurant
 menu = {
     "Baja Taco": 4.25,
     "Burrito": 7.50,
@@ -11,11 +10,17 @@ menu = {
     "Tortilla Salad": 8.00
 }
 
+
+amount = 0
 while True:
     try:
-        # Take Order
-        item = input()
-        if item in menu.lower():
-            print(fruits[item.lower()])
+        item = input("Item: ")
+        key = item.title()
+        if key in menu:
+            amount = round(amount + menu[key], 2)
+            print(f"${amount:.2f}")
     except EOFError:
+        break
+    except ValueError:
         pass
+print()
