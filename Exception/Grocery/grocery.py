@@ -1,19 +1,13 @@
-dict = {}
+word_counts = {}
+
 while True:
     try:
-        item = input()
-        key = item.upper()
-        if key in dict:
-            dict[key] = dict[key] + 1
-        else:
-            dict.update({key: 1})
+        word = input().strip()  # strip() to remove whitespace
+        key = word.upper()
+        word_counts[key] = word_counts.get(key, 0) + 1  # get the count of grocery item
     except EOFError:
         break
 
-myKeys = list(dict.keys())
-myKeys.sort()
-
-# Sorted Dictionary
-sd = {i: dict[i] for i in myKeys}
-for key, value in sd.items():
-    print(f"{value} {key}")
+# Print sorted results
+for key in sorted(word_counts.keys()):
+    print(f"{word_counts[key]} {key}")
