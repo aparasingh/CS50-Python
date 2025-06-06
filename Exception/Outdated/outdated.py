@@ -1,41 +1,36 @@
 months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
 ]
 
 while True:
     try:
-        date = input("Date: ")
-        date_fin = date.strip()
-        if ' ' in date_fin:
-            fields = date_fin.split(" ")
-            if len(fields) == 3 and len(date_fin.split(',')) == 2:
-                month = months.index(fields[0]) + 1
-                date = int(fields[1].split(',')[0])
-                year = int(fields[2])
-                if date < 32 and date > 0 and month >= 1 and month <= 12:
-                    print(f"{year:04}-{month:02}-{date:02}")
+        date_input = input("Date: ").strip()
+
+        if ',' in date_input:  # Month DD, YYYY format
+            parts = date_input.split()
+            if len(parts) == 3 and parts[1].endswith(','):
+                month_name = parts[0]
+                day = int(parts[1][:-1])  # Remove comma
+                year = int(parts[2])
+
+                if month_name in months:
+                    month = months.index(month_name) + 1
+                    if 1 <= day <= 31 and 1 <= month <= 12:
+                        print(f"{year:04d}-{month:02d}-{day:02d}")
+                        break
+
+        elif '/' in date_input:  # MM/DD/YYYY format
+            parts = date_input.split('/')
+            if len(parts) == 3:
+                month, day, year = map(int, parts)
+                if 1 <= day <= 31 and 1 <= month <= 12:
+                    print(f"{year:04d}-{month:02d}-{day:02d}")
                     break
-        else:
-            fields = date_fin.split("/")
-            if len(fields) == 3:
-                int_arr = [int(i) for i in fields]
-                if int_arr[1] < 32 and int_arr[1] > 0 and int_arr[0] > 0 and int_arr[0] < 13:
-                    print(f"{int_arr[2]:04}-{int_arr[0]:02}-{int_arr[1]:02}")
-                    break
-    except ValueError:
-        pass
-    except EOFError:
+
+        pass  # Silent reprompt
+
+    except (ValueError, IndexError):
+        pass  # Silent reprompt
+    except (EOFError, KeyboardInterrupt):
         break
-    else:
-        pass
