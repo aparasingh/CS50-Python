@@ -1,5 +1,4 @@
 post = input("Input: ")
-for c in post:
-    if c.lower() not in ('a', 'e', 'i', 'o', 'u'):
-        print(c, end="")
-print("")
+vowels = "aeiou"
+result = ''.join(c for c in post if c.lower() not in vowels)
+print(result)
