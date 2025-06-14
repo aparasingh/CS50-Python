@@ -1,5 +1,5 @@
-import random
-import math
+from random import randint
+from math import pow
 
 
 def main():
@@ -46,9 +46,9 @@ def get_level():
 
 def generate_integer(level):
     if level == 1:
-        return random.randint(0, int(math.pow(10, level) - 1))
+        return randint(0, int(pow(10, level) - 1))
     else:
-        return random.randint(int(math.pow(10, level-1)), int(math.pow(10, level) - 1))
+        return randint(int(pow(10, level-1)), int(pow(10, level) - 1))
 
 
 if __name__ == "__main__":
