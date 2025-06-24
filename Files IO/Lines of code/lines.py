@@ -12,6 +12,7 @@ else:
             for line in file:
                 counter = counter + 1
             print(counter)
+        file.close()
     else:
         print("Not a Python file")
 
