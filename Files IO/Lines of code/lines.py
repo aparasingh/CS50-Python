@@ -7,8 +7,11 @@ elif len(sys.argv) > 2:
 else:
     parts = sys.argv[1].split(".")
     if len(parts) == 2 and parts[1] == "py":
-        file = open(sys.argv[1], "r")
-        print(file)
+        counter = 0
+        with open(parts[0]+"/"+sys.argv[1], "r") as file:
+            for line in file:
+                counter = counter + 1
+            print(counter)
     else:
         print("Not a Python file")
 
