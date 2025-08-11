@@ -5,7 +5,7 @@ if len(sys.argv) < 3:
     sys.exit("Too few arguments")
 elif len(sys.argv) > 3:
     sys.exit("Too many arguments")
-else:åç
+else:
     try:
         with open(sys.argv[1], newline='') as readfile:
             reader = csv.DictReader(readfile)
