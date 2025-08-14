@@ -11,8 +11,10 @@ def validate(ip):
     if len(values) == 4:
         try:
             for i in values:
-                num =int(i)
+                num = int(i)
                 if num < 0 or num > 255:
+                    return False
+                elif re.search(r"^0", i) and num > 0:
                     return False
         except ValueError:
             return False
