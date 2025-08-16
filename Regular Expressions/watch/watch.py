@@ -12,6 +12,8 @@ def parse(s):
             values = s.split('src=')
             url = values[1].split('"')[1]
             if re.search(r"^https://www.youtube.com/embed/+[a-zA-Z0-9]&",url):
+                url_part = url.split('embed/')[1]
+                url = 'https://youtu.be/' + url_part
                 return url
             else:
                 return None
