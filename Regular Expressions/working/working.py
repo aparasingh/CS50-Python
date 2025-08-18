@@ -11,20 +11,21 @@ def convert(s):
         times = []
         values = s.split(" to ")
         for i in range(2):
-            time = values[i]
-            if re.search(r"PM", time):
-                parts = time.split(' ')
-                value = int(parts[0]) + 12
-                times.append(str(value) + ':00')
+            parts = values[i].split(' ')
+            time = parts[0]
+            time_of_day = parts[1]
+            if re.search(r":", time):
+                hours, minutes = time.split(':')
             else:
-                parts = time.split(' ')
-                times.append(str(parts[0]) + ':00')
-
+                hours = time
+                minutes = '00'
+            if time_of_day == 'PM':
+                hours = int(hours) + 12
+            times.append(str(hours) + ':' + minutes)
     except IndexError:
         sys.exit(1)
 
     return times[0] + ' to ' + times[1]
-
 
 
 if __name__ == "__main__":
