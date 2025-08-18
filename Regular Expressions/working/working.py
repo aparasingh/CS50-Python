@@ -21,9 +21,12 @@ def convert(s):
                 minutes = '00'
             if time_of_day == 'PM':
                 hours = str(int(hours) + 12)
-            times.append(hours + ':' + minutes)
+            if int(minutes) > 59:
+                raise ValueError
+
+            times.append('{:02d}'.format(int(hours)) + ':' + minutes)
     except IndexError:
-        sys.exit(1)
+        raise ValueError
 
     return times[0] + ' to ' + times[1]
 
