@@ -20,8 +20,8 @@ def convert(s):
                 hours = time
                 minutes = '00'
             if time_of_day == 'PM':
-                hours = int(hours) + 12
-            times.append(str(hours) + ':' + minutes)
+                hours = str(int(hours) + 12)
+            times.append(hours + ':' + minutes)
     except IndexError:
         sys.exit(1)
 
