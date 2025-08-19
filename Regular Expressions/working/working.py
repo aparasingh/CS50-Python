@@ -12,17 +12,30 @@ def convert(s):
         values = s.split(" to ")
         for i in range(2):
             parts = values[i].split(' ')
-            time = parts[0]
+            value = parts[0]
             time_of_day = parts[1]
-            if re.search(r":", time):
-                hours, minutes = time.split(':')
+            if re.search(r"[1-2][0-9]:[0-5][0-9]", value) or re.search(r"[1-9]:[0-5][0-9]", value):
+                hours, minutes = value.split(':')
+                if re.search(r"[0][1-9]", hours):
+                    raise ValueError
+            elif (re.search(r"[1-2][0-9]", value) or re.search(r"[1-9]", value)):
+                try:
+                    int(value) < 24
+                    hours = value
+                    minutes = '00'
+                except ValueError:
+                    raise ValueError
+                if re.search(r"[0][1-9]", hours):
+                    raise ValueError
             else:
-                hours = time
-                minutes = '00'
-            if time_of_day == 'PM':
-                hours = str(int(hours) + 12)
-            if int(minutes) > 59:
                 raise ValueError
+
+            if time_of_day == 'PM' and hours != '12':
+                hours = str(int(hours) + 12)
+            elif time_of_day == 'PM' and hours == '12':
+                hours = '12'
+            elif time_of_day == 'AM' and hours == '12':
+                hours = '00'
 
             times.append('{:02d}'.format(int(hours)) + ':' + minutes)
     except IndexError:
