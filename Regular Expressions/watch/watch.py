@@ -7,21 +7,22 @@ def main():
 
 
 def parse(s):
-    #if re.search(r"^\<iframe+(\w\W\s)*+\>\</iframe\>&",s, re.IGNORECASE):
-    try:
-        values = s.split('src=')
-        part = values[1].split('"')
-        url = part[1]
-        if re.search(r"^https?://(?:www\.)youtube.com/embed/", url):
-            url_part = url.split('embed/')[1]
-            url = 'https://youtu.be/' + url_part
-            return url
-        else:
-            return None
-    except IndexError:
-        return None
-    #else:
-        #return None
+    # Use regex to extract the src attribute value from iframe tags
+    # This pattern looks for iframe tags and captures the src attribute value
+    pattern = r'<iframe[^>]*\ssrc="([^"]*)"[^>]*>'
+    match = re.search(pattern, s, re.IGNORECASE)
+
+    if match:
+        url = match.group(1)
+        # Check if it's a YouTube embed URL
+        youtube_pattern = r"^https?://(?:www\.)?youtube\.com/embed/([a-zA-Z0-9_-]+)"
+        youtube_match = re.search(youtube_pattern, url)
+
+        if youtube_match:
+            video_id = youtube_match.group(1)
+            return f"https://youtu.be/{video_id}"
+
+    return None
 
 
 if __name__ == "__main__":
