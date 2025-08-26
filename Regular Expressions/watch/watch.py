@@ -7,20 +7,22 @@ def main():
 
 
 def parse(s):
-    if re.search(r"^<iframe\s+\w+\s+\W+\"></iframe>&",s):
-        try:
-            values = s.split('src=')
-            url = values[1].split('"')[1]
-            if re.search(r"^https://www.youtube.com/embed/+[a-zA-Z0-9]&",url):
-                url_part = url.split('embed/')[1]
-                url = 'https://youtu.be/' + url_part
-                return url
-            else:
-                return None
-        except IndexError:
+    #if re.search(r"^\<iframe+(\w\W\s)*+\>\</iframe\>&",s, re.IGNORECASE):
+    try:
+        values = s.split('src=')
+        part = values[1].split('"')
+        url = part[1]
+        if re.search(r"^https?://(?:www\.)youtube.com/embed/", url):
+            url_part = url.split('embed/')[1]
+            url = 'https://youtu.be/' + url_part
+            return url
+        else:
             return None
-    else:
+    except IndexError:
         return None
+    #else:
+        #return None
+
 
 if __name__ == "__main__":
     main()
