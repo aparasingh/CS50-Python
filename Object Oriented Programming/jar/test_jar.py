@@ -1,5 +1,6 @@
 from jar import Jar
 
+
 def main():
     test_init()
     test_str()
@@ -30,7 +31,6 @@ def test_deposit():
         assert False, "Should have raised ValueError"
     except ValueError:
         print("✓ Capacity exceeded test passed")
-
 
 
 def test_withdraw():
